@@ -30,7 +30,6 @@ export class UtilisateurService {
     const saltOrRounds = 10;
     const hash = await bcrypt.hash(createdUtilisateur.password, saltOrRounds);
     createdUtilisateur.password = hash;
-
     return createdUtilisateur.save();
   }
 
