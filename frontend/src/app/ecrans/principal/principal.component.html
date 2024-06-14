@@ -1,5 +1,5 @@
 <main>
-    <aside>
+    <aside class="firstAside">
         <div class="liste-serveur">
             <div class="serveur" routerLink="/ajout-serveur" matTooltip="Créer un nouveau serveur" matTooltipPosition="right">
                 <mat-icon color="primary" fontIcon="add_circle"></mat-icon>
@@ -21,7 +21,7 @@
         </div>
     </aside>
     @if (actualServer) {
-    <aside>
+    <aside class="secondAside">
         <div class="liste-serveur">
             <form [formGroup]="formulaire" (ngSubmit)="onAjoutSalon()">
                 <mat-form-field>
@@ -30,7 +30,7 @@
                 </mat-form-field>
             </form>
             @for (salon of listeSalon; track salon._id) {
-            <div class="salon" matTooltipPosition="right">
+            <div class="salon" (click)="OnClickSalon(salon)" matTooltipPosition="right">
                 <mat-icon fontIcon="mode_comment"></mat-icon>
                 <span>{{ salon.nom }}</span>
             </div>
@@ -61,5 +61,5 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div> 
 </main>

@@ -1,8 +1,10 @@
 main {
     display: flex;
     height: 100vh;
+    flex-direction: row;
 
     aside {
+        width: 100px;
         display: flex;
         flex-direction: column;
         padding: 0.5em;
@@ -59,6 +61,9 @@ main {
                 cursor: pointer;
             }
         }
+    }
+    .secondAside {
+        width: 205px;
     }
 
     .liste-message {

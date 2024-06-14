@@ -45,7 +45,6 @@ export class PrincipalComponent {
             const newSalon: Salon = {
                 nom: this.formulaire.value.nom,
             };
-
             this.http.put<Serveur>(`http://localhost:3000/serveur/ajout-salon/${this.actualServer}`, newSalon).subscribe(
                 updatedServeur => {
                     const index = this.listeServeur.findIndex(serveur => serveur._id === this.actualServer);
@@ -54,11 +53,12 @@ export class PrincipalComponent {
                         this.listeSalon = updatedServeur.salon;
                     }
                     this.formulaire.reset();
-                },
-                error => {
-                    console.error('Error adding salon:', error);
                 }
             );
         }
+    }
+    public OnClickSalon(salon: Salon) {
+        console.log(salon);
+        
     }
 }

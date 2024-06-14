@@ -6,13 +6,14 @@ import {
   Utilisateur,
   UtilisateurDocument,
 } from 'src/utilisateur/utilisateur.schema';
-import { Salon, Serveur, ServeurDocument } from './serveur.schema';
+import { Message, Salon, Serveur, ServeurDocument } from './serveur.schema';
 
 @Injectable()
 export class ServeurService {
   constructor(
     @InjectModel(Serveur.name) private serveurModel: Model<ServeurDocument>,
     @InjectModel(Salon.name) private salonModel: Model<ServeurDocument>,
+    @InjectModel(Message.name) private messageModel: Model<ServeurDocument>,
     @InjectModel(Utilisateur.name)
     private utilisateurModel: Model<UtilisateurDocument>,
   ) {}
@@ -52,9 +53,7 @@ export class ServeurService {
     createSalonDto: any,
   ): Promise<Serveur> {
     const server = await this.serveurModel.findById(serverId).exec();
-    const newSalon = new this.salonModel(createSalonDto);
-    await newSalon.save();
-    server.salon.push(newSalon);
+    server.salon.push(createSalonDto);
     return server.save();
   }
 }
