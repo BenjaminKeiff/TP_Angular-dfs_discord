@@ -23,22 +23,29 @@
     @if (actualServer) {
     <aside>
         <div class="liste-serveur">
-            <form [formGroup]="formulaire" (ngSubmit)="onAjoutSalon()">
+            <form [formGroup]="formulaireSalon" (ngSubmit)="onAjoutSalon()">
                 <mat-form-field>
                     <mat-label>Ajouter salon</mat-label>
                     <input formControlName="nom" matInput placeholder="Ex. Salon 1" />
                 </mat-form-field>
             </form>
             @for (salon of listeSalon; track salon._id) {
-            <div class="salon" matTooltipPosition="right">
+            <div (click)="onClickSalon(salon)" class="salon" matTooltipPosition="right">
                 <mat-icon fontIcon="mode_comment"></mat-icon>
                 <span>{{ salon.nom }}</span>
             </div>
             }
         </div>
     </aside>
-    }
-
+    <div class="liste-message">
+        <form [formGroup]="formulaireMessage" (ngSubmit)="onAjoutMessage()">
+            <mat-form-field>
+                <mat-label>Ajouter un message</mat-label>
+                <input matInput formControlName="contenu" placeholder="..." />
+            </mat-form-field>
+        </form>
+    </div>
+    } @if (listeMessage) {
     <div class="liste-message">
         <div class="message">
             <img class="avatar" src="https://play-lh.googleusercontent.com/0goocG7RJZDZ41ShfBPl-h7ctwHKHjqzn4nSImyL8_RWyXqeYNKw-CdGAKhgPGZG5Es" />
@@ -50,16 +57,6 @@
                 </p>
             </div>
         </div>
-
-        <div class="message">
-            <img class="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRls5vfL2feg44afSnF6H2fS77qPl0V2phQg&s" />
-            <div class="partie-message">
-                <div class="utilisateur">Tom SAWYER</div>
-                <p class="contenu">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos atque iusto dolorem consequatur error! Itaque, nobis consequuntur veritatis
-                    quibusdam sed illum, inventore officiis, et reprehenderit dicta dolor earum dolorum laborum.
-                </p>
-            </div>
-        </div>
     </div>
+    }
 </main>

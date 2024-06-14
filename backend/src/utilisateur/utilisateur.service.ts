@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
 import { Utilisateur, UtilisateurDocument } from './utilisateur.schema';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UtilisateurService {
@@ -21,6 +21,14 @@ export class UtilisateurService {
       return utilisateur;
     }
 
+    return null;
+  }
+
+  async getByEmail(email: string): Promise<Utilisateur | null> {    
+    const utilisateur = await this.utilisateurModel.findOne({ email });
+    if (utilisateur) {
+      return utilisateur;
+    }
     return null;
   }
 

@@ -1,7 +1,8 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { UtilisateurService } from './utilisateur.service';
+import { Body, Controller, Get, Param, Post, Request, UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from 'src/auth.guard';
+import { UtilisateurService } from './utilisateur.service';
+import { Utilisateur } from 'src/utilisateur/utilisateur.schema';
 
 @Controller()
 export class UtilisateurController {
@@ -10,14 +11,14 @@ export class UtilisateurController {
     private readonly jwtService: JwtService,
   ) {}
 
-  // @Get()
-  // findAll() {
-  //   return this.utilisateurService.findAll();
-  // }
+  @Get(':email')
+  async findByEmail(@Param('email') email: string): Promise<Utilisateur> {
+    return await this.utilisateurService.getByEmail(email);
+  }
 
   @Post('inscription')
   async inscription(@Body() createUtilisateurDto: any) {
-    //TODO : vérifier les donnée (regles mot de passe, email unique ...)
+    //TODO : vérifier les données (regles mot de passe, email unique ...)
 
     return this.utilisateurService.create(createUtilisateurDto);
   }
@@ -32,6 +33,7 @@ export class UtilisateurController {
 
     const payload = {
       sub: utilisateur.email,
+      id: utilisateur._id,
     };
 
     return await this.jwtService.signAsync(payload);
