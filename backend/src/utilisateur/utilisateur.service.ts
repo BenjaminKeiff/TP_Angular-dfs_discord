@@ -11,6 +11,14 @@ export class UtilisateurService {
     private utilisateurModel: Model<UtilisateurDocument>,
   ) {}
 
+  async getByEmail(email: string): Promise<Utilisateur | null> {
+    const utilisateur = await this.utilisateurModel.findOne({ email });
+    if (utilisateur) {
+      return utilisateur;
+    }
+    return null;
+  }
+  
   async getByEmailAndClearPassword(
     email: string,
     clearPassword: string,

@@ -1,7 +1,8 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Request, UseGuards } from '@nestjs/common';
 import { UtilisateurService } from './utilisateur.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from 'src/auth.guard';
+import { Utilisateur } from 'src/utilisateur/utilisateur.schema';
 
 @Controller()
 export class UtilisateurController {
@@ -9,11 +10,10 @@ export class UtilisateurController {
     private readonly utilisateurService: UtilisateurService,
     private readonly jwtService: JwtService,
   ) {}
-
-  // @Get()
-  // findAll() {
-  //   return this.utilisateurService.findAll();
-  // }
+  @Get(':email')
+  async findByEmail(@Param('email') email: string): Promise<Utilisateur> {
+    return await this.utilisateurService.getByEmail(email);
+  }
 
   @Post('inscription')
   async inscription(@Body() createUtilisateurDto: any) {
