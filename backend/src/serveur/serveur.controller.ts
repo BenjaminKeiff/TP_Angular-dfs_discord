@@ -48,4 +48,12 @@ export class ServeurController {
   ): Promise<Serveur> {
     return this.serveurService.addSalonToServer(id, createSalonDto);
   }
+
+  @Put('/salon/:id/message')
+  async addMessageToSalon(
+    @Param('id') id: string,
+    @Body() createSalonDto: any,
+  ): Promise<Serveur> {
+    return this.serveurService.addMessageToSalon(id, createSalonDto);
+  }
 }

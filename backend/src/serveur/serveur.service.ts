@@ -56,4 +56,13 @@ export class ServeurService {
     server.salon.push(createSalonDto);
     return server.save();
   }
+
+  async addMessageToSalon(
+    serverId: string,
+    CreatedMessageDto: any,
+  ): Promise<Serveur> {
+    const server = await this.serveurModel.findById(serverId).exec();
+    server.salon.push(CreatedMessageDto);
+    return server.save();
+  }
 }

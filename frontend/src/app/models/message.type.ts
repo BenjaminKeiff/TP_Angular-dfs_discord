@@ -1,6 +1,6 @@
-export declare type Salon = {
-    _id?: string;
+export declare type Message = {
+    idSalon: string;
+    idUtilisateur: string;
     contenu: string;
-    utilisateur: string;
     date: string;
 };

@@ -5,14 +5,14 @@
                 <mat-icon color="primary" fontIcon="add_circle"></mat-icon>
             </div>
 
-            @for (serveur of listeServeur; track serveur._id) {
-
-            <div (click)="OnSelectServer(serveur)" class="serveur" [matTooltip]="serveur.nom" matTooltipPosition="right">
+            <div
+                *ngFor="let serveur of listeServeur; trackBy: trackById"
+                (click)="OnSelectServer(serveur)"
+                class="serveur"
+                [matTooltip]="serveur.nom"
+                matTooltipPosition="right">
                 <img [attr.src]="serveur.urlLogo" />
             </div>
-            } @if (listeSalon.length !== 0) { @for (salon of listeSalon; track salon._id) {
-            <div class="salon" [matTooltip]="salon.nom" matTooltipPosition="right"></div>
-            } }
         </div>
         <div class="info-profil">
             <img class="avatar" src="https://play-lh.googleusercontent.com/0goocG7RJZDZ41ShfBPl-h7ctwHKHjqzn4nSImyL8_RWyXqeYNKw-CdGAKhgPGZG5Es" />
@@ -20,8 +20,7 @@
             <mat-icon class="bouton-profil" fontIcon="settings" routerLink="/profil"></mat-icon>
         </div>
     </aside>
-    @if (actualServer) {
-    <aside class="secondAside">
+    <aside *ngIf="actualServer" class="secondAside">
         <div class="liste-serveur">
             <form [formGroup]="formulaire" (ngSubmit)="onAjoutSalon()">
                 <mat-form-field>
@@ -29,37 +28,31 @@
                     <input formControlName="nom" matInput placeholder="Ex. Salon 1" />
                 </mat-form-field>
             </form>
-            @for (salon of listeSalon; track salon._id) {
-            <div class="salon" (click)="OnClickSalon(salon)" matTooltipPosition="right">
+            <div *ngFor="let salon of listeSalon; trackBy: trackById" (click)="OnClickSalon(salon)" class="salon">
                 <mat-icon fontIcon="mode_comment"></mat-icon>
                 <span>{{ salon.nom }}</span>
             </div>
-            }
         </div>
     </aside>
-    }
-
-    <div class="liste-message">
-        <div class="message">
-            <img class="avatar" src="https://play-lh.googleusercontent.com/0goocG7RJZDZ41ShfBPl-h7ctwHKHjqzn4nSImyL8_RWyXqeYNKw-CdGAKhgPGZG5Es" />
-            <div class="partie-message">
-                <div class="utilisateur">John DOE</div>
-                <p class="contenu">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias iste quasi odit quos reprehenderit repellendus natus quas consequatur
-                    aliquam minima, sunt eum facere sit unde voluptatibus ullam neque amet? Ipsam?
-                </p>
+    <section *ngIf="actualSalon">
+        <div class="message-form">
+            <form [formGroup]="messageForm" (ngSubmit)="onAjoutMessage()">
+                <mat-form-field>
+                    <mat-label>Votre message</mat-label>
+                    <input formControlName="contenu" matInput placeholder="Tapez votre message..." />
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary">Envoyer</button>
+            </form>
+        </div>
+        <div class="messages-list">
+            <div *ngFor="let message of messages" class="message">
+                <img class="avatar" src="https://play-lh.googleusercontent.com/0goocG7RJZDZ41ShfBPl-h7ctwHKHjqzn4nSImyL8_RWyXqeYNKw-CdGAKhgPGZG5Es" />
+                <div class="partie-message">
+                    <div class="utilisateur">{{ message.idUtilisateur }}</div>
+                    <p class="contenu">{{ message.contenu }}</p>
+                    <span class="date">{{ message.date }}</span>
+                </div>
             </div>
         </div>
-
-        <div class="message">
-            <img class="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRls5vfL2feg44afSnF6H2fS77qPl0V2phQg&s" />
-            <div class="partie-message">
-                <div class="utilisateur">Tom SAWYER</div>
-                <p class="contenu">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos atque iusto dolorem consequatur error! Itaque, nobis consequuntur veritatis
-                    quibusdam sed illum, inventore officiis, et reprehenderit dicta dolor earum dolorum laborum.
-                </p>
-            </div>
-        </div>
-    </div> 
+    </section>
 </main>

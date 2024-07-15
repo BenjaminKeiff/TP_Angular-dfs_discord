@@ -35,7 +35,8 @@
       "source.fixAll.eslint": "explicit",
       "source.organizeImports": "explicit",
       "source.fixAll": "explicit"
-    }
+    },
+    "vsicons.presets.angular": true
   },
   "launch": {
     "version": "0.2.0",
