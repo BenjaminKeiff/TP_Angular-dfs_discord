@@ -1,85 +1,100 @@
 main {
-  display: flex;
-  height: 100vh;
-
-  aside {
     display: flex;
-    flex-direction: column;
-    padding: 0.5em;
+    height: 100vh;
+    flex-direction: row;
 
-    .liste-serveur {
-      width: 50px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-
-      .serveur {
-        mat-icon {
-          width: 50px;
-          height: 50px;
-          font-size: 50px;
-          color: #31c823;
-          cursor: pointer;
+    aside {
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5em;
+        .salon {
+            display: flex;
+            width: 300px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            &.ajout {
+              flex-direction: column;
+            }
+            mat-icon {
+                margin-right: 5px;
+            }
         }
 
-        img {
-          border-radius: 50%;
-          width: 50px;
-          height: 50px;
-          object-fit: cover;
-          cursor: pointer;
+        .liste-serveur {
+            width: 50px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+
+            .serveur {
+                mat-icon {
+                    width: 50px;
+                    height: 50px;
+                    font-size: 50px;
+                    cursor: pointer;
+                }
+
+                img {
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                    cursor: pointer;
+                }
+            }
         }
-      }
+
+        .info-profil {
+            display: flex;
+
+            .avatar {
+                border-radius: 50%;
+                width: 25px;
+                height: 25px;
+                object-fit: cover;
+                margin-right: 0.5em;
+            }
+
+            .bouton-profil {
+                margin-left: 0.5em;
+                cursor: pointer;
+            }
+        }
+    }
+    .secondAside {
+        width: 205px;
     }
 
-    .info-profil {
-      display: flex;
-      
-
-      .avatar {
-        border-radius: 50%;
-        width: 25px;
-        height: 25px;
-        object-fit: cover;
-        margin-right: 0.5em;
-      }
-
-      .bouton-profil {
-        margin-left: 0.5em;
-        cursor: pointer;
-      }
-    }
-  }
-
-  .liste-message {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin-left: 5em;
-    margin-top: 5em;
-
-    .message {
-      display: flex;
-      margin: 1em;
-      border-bottom: 1px solid #585858;
-
-      .avatar {
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        margin-right: 1em;
-      }
-
-      .partie-message {
+    .liste-message {
         display: flex;
         flex-direction: column;
         flex: 1;
+        margin-left: 5em;
+        margin-top: 5em;
 
-        .utilisateur {
-          color: grey;
+        .message {
+            display: flex;
+            margin: 1em;
+            border-bottom: 1px solid #585858;
+
+            .avatar {
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                margin-right: 1em;
+            }
+
+            .partie-message {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+
+                .utilisateur {
+                    color: grey;
+                }
+            }
         }
-      }
     }
-  }
 }
